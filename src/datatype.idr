@@ -18,7 +18,8 @@ data Fin : Nat -> Type where
   FZ : Fin (S x)
   FS : Fin n -> Fin (S n)
 
-index : Fin n -> Vect n a -> a
+-- index : Fin n -> Vect n a -> a
+index : {a:Type} -> {n:Nat} -> Fin n -> Vect n a -> a
 index FZ     (x :: xs) = x
 index (FS k) (x :: xs) = index k xs
 
@@ -30,3 +31,12 @@ data T : Nat -> Type where
   B : Bool -> T a
   C : T k -> T k
   D : Bool -> Bool -> T a
+
+-- Some creasy stuff
+limitNumber : Nat -> Type
+limitNumber n = if n < 2 then Nat else Void
+
+-- There is no point in doing so?
+-- Maybe only just fo run
+testNumber' : {n: Nat} -> limitNumber n
+testNumber' {n=(S(Z))} = 0
